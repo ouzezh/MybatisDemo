@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ozz.mybatis.mapper.routing.datasource.TestMapper">
+    <select id="selectTest" resultType="string">
+        select name from city order by id
+    </select>
+
+    <update id="updateTest">
+        update city t set t.memo=now() where t.id in (<foreach collection="ids" item="item">
+        #{item}</foreach>)
+    </update>
+    <select id="selectTxTimestamp" resultType="date">
+        select memo from city where id=#{id}
+    </select>
+
+    <!--
+    1.生成主键
+    <insert id="insert">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            select SEQ_x.nextval from dual
+        </selectKey>
+        INSERT INTO x (
+        ID
+        ) VALUES (
+        #{id,jdbcType=BIGINT}
+        )
+    </insert>
+    <insert id="insert" useGeneratedKeys="true" keyColumn="ID" keyProperty="id">
+        INSERT INTO x (
+        ID
+        ) VALUES (
+        SEQ_x.nextval
+        )
+    </insert>
+
+    2.子查询
+    <resultMap id="resMap" type="xx">
+        ...
+        <collection property="subs" select="listSubs" column="{type=type, parentId=parent_id}"></collection>
+    </resultMap>
+    <select id="listSubs" resultMap="resMap">
+        ...
+    </select>
+
+    3.引用常量
+    <select id="x">
+        select '${@com.ozz.mybatis.Constants.x}' c
+        union
+        select ${@com.ozz.mybatis.Constants.o.getX()} c
+    </select>
+    -->
+
+</mapper>

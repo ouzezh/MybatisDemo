@@ -1,0 +1,36 @@
+spring:
+  datasource:
+
+#    #单数据源
+#    url: jdbc:log4jdbc:mysql://jw_db:3306/api?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong
+#    username: api
+#    password: p
+#    driverClassName: net.sf.log4jdbc.DriverSpy
+#    hikari:
+#      maximumPoolSize: 3
+#      maxLifetime: 1800000
+
+    #多数据源
+    datasource1:
+      driverClassName: net.sf.log4jdbc.DriverSpy
+      jdbcUrl: jdbc:log4jdbc:mysql://jw_db:3306/api?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong
+      username: api
+      password: p
+      maximumPoolSize: 3
+      maxLifetime: 1800000
+    datasource2:
+      driverClassName: net.sf.log4jdbc.DriverSpy
+      #loadBalanceAutoCommitStatementThreshold: When auto-commit is enabled, the number of statements which should be executed before triggering load-balancing to rebalance. Default value of 0 causes load-balanced connections to only rebalance when exceptions are encountered
+      jdbcUrl: jdbc:log4jdbc:mysql:loadbalance://jw_db:3306,jw_db2:3306/mysql?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong&loadBalanceAutoCommitStatementThreshold=3
+      username: api
+      password: p
+      maximumPoolSize: 3
+      maxLifetime: 1800000
+
+mybatis:
+  mapper-locations: classpath*:mapper/routing/**/*.xml
+  type-aliases-package: com.ozz.mybatis.model
+  type-aliases-super-type: com.ozz.mybatis.model.BaseObject
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    mapUnderscoreToCamelCase: true
