@@ -8,17 +8,14 @@ import com.ozz.mybatis.mapper.routing.datasource.TestMapper;
 import com.ozz.mybatis.mapper.routing.datasource2.Test2Mapper;
 import com.ozz.mybatis.mapper.second.TestSecondMapper;
 import com.ozz.mybatis.util.MybatisUtil;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Service;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 @Service
 //@Transactional(propagation = Propagation.NOT_SUPPORTED, rollbackFor = Exception.class)

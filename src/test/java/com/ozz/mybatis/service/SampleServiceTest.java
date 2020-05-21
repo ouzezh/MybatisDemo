@@ -11,65 +11,65 @@ import org.springframework.util.Assert;
 public class SampleServiceTest {
 
   @Autowired
-  private SampleService testService;
+  private SampleService sampleService;
 
   @Test
   public void testSelectJdbcTemplate() {
-    System.out.println(testService.selectJdbcTemplate());
+    System.out.println(sampleService.selectJdbcTemplate());
   }
 
   @Test
   public void testSelect() {
-    PageInfo<String> res = testService.selectPage();
+    PageInfo<String> res = sampleService.selectPage();
     System.out.println(res);
   }
 
   @Test
   public void testSelect2() {
-    Page<String> res = testService.selectPage2();
+    Page<String> res = sampleService.selectPage2();
     System.out.println(res);
   }
 
   @Test
   public void testSelectSecond() {
-    Page<String> res = testService.selectPageSecond();
+    Page<String> res = sampleService.selectPageSecond();
     System.out.println(res);
   }
 
   @Test
   public void testReadWriteSplit() {
-    Page<String> res = testService.readWriteSplit();
+    Page<String> res = sampleService.readWriteSplit();
     System.out.println(res);
   }
 
   @Test
   public void testUpdate() {
-    int res = testService.updateTest(1L);
+    int res = sampleService.updateTest(1L);
     System.out.println(res);
   }
 
   @Test
   public void testTxAdviceSelect() throws Exception {
     long id = 1;
-    Assert.state(!testService.checkTxUpdated(id), "previous state error");
+    Assert.state(!sampleService.checkTxUpdated(id), "previous state error");
     try {
-      testService.selectTxAdviceTest(id);
+      sampleService.selectTxAdviceTest(id);
     } catch (UnsupportedOperationException e) {
       System.out.println(e.getMessage());
     }
-    Assert.state(testService.checkTxUpdated(id), "record change error");
+    Assert.state(sampleService.checkTxUpdated(id), "record change error");
   }
 
   @Test
   public void testTxAdviceUpdate() throws Exception {
     long id = 2;
-    Assert.state(!testService.checkTxUpdated(id), "previous state error");
+    Assert.state(!sampleService.checkTxUpdated(id), "previous state error");
     try {
-      testService.updateTxAdviceTest(id);
+      sampleService.updateTxAdviceTest(id);
     } catch (UnsupportedOperationException e) {
       System.out.println(e.getMessage());
     }
-    Assert.state(!testService.checkTxUpdated(id), "record rollback error");
+    Assert.state(!sampleService.checkTxUpdated(id), "record rollback error");
   }
 
 }
