@@ -23,7 +23,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 /**
  * 配置多数据源
- * 
+ *
+ * 方式一：扫描所有MapperLocation，使用Aspect切换AbstractRoutingDataSource来源
+ *
+ * 方式二(推荐)：扫描不同basePackages及MapperLocation的路径，使用对应接口自动切换数据源
+ *
  */
 @Configuration
 @MapperScan(basePackages=RoutingDataSourceConfig.PACKAGE, sqlSessionFactoryRef="masterSqlSessionFactory")

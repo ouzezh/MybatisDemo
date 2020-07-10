@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+/**
+ * 自动切换数据源：根据basePackages及MapperLocation包路径
+ *
+ */
 @Configuration
 @MapperScan(basePackages = SecondDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "secondSqlSessionFactory")
 public class SecondDataSourceConfig {

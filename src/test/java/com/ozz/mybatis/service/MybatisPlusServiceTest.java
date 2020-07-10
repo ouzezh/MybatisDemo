@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TestServiceTest {
+public class MybatisPlusServiceTest {
 
   @Autowired
-  private ITestService testService;
+  private IMybatisPlusService mybatisPlusService;
 
   @Test
   public void testPage() {
-    testService.page(1, 10);
+    mybatisPlusService.page(1, 10);
   }
 
 }
