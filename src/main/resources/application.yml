@@ -22,6 +22,7 @@ spring:
       driverClassName: net.sf.log4jdbc.DriverSpy
       #loadBalanceAutoCommitStatementThreshold: When auto-commit is enabled, the number of statements which should be executed before triggering load-balancing to rebalance. Default value of 0 causes load-balanced connections to only rebalance when exceptions are encountered
       jdbcUrl: jdbc:log4jdbc:mysql:loadbalance://jw_db:3306,jw_db2:3306/mysql?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong&loadBalanceAutoCommitStatementThreshold=3
+      #jdbc:mysql:replication://jw_db:3306,jw_db2:3306  #主从模式(读写分离)
       username: api
       password: p
       maximumPoolSize: 3
