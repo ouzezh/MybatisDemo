@@ -23,7 +23,7 @@ public class RoutingDataSourceAspect implements Ordered {
   protected Logger logger = LoggerFactory.getLogger(getClass());
 
   /**
-   * 切点: 所有配置 DataSource 注解的方法
+   * 基于注解切换数据源
    */
   @Pointcut("@annotation(com.ozz.mybatis.component.db.routing.TargetDataSource)")
   public void dataSourcePointCut() {
@@ -48,7 +48,7 @@ public class RoutingDataSourceAspect implements Ordered {
   }
 
   /**
-   * 切点: service层方法，可用于配置读写分离
+   * 基于方法名切换数据源，可用于配置读写分离
    */
   @Around("serviePointcut()")
   public Object readWriteSplit(ProceedingJoinPoint point) throws Throwable {
