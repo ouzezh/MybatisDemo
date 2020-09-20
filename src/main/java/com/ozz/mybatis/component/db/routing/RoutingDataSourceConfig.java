@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.zaxxer.hikari.HikariDataSource;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,7 +17,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -79,6 +78,7 @@ public class RoutingDataSourceConfig {
   @Bean(name = "masterSqlSessionFactory")
   @Primary
   public SqlSessionFactory masterSqlSessionFactory(RoutingDataSource routingSource, PaginationInterceptor paginationInterceptor)  throws Exception {
+    // MyBatis 配置
 //    final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 //    sessionFactory.setDataSource(routingSource);
 //    sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
@@ -86,6 +86,7 @@ public class RoutingDataSourceConfig {
 //    sessionFactory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
 //    return sessionFactory.getObject();
 
+    // MyBatis-Plus 配置
     MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
     sqlSessionFactory.setDataSource(routingSource);
     sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(MAPPER_LOCATION));

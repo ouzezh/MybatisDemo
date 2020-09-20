@@ -10,7 +10,7 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
   public static final String DATASOURCE1 = "dataSource1";
   public static final String DATASOURCE2 = "dataSource2";
 
-  private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
+  private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
   public RoutingDataSource() {}
   public RoutingDataSource(DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {

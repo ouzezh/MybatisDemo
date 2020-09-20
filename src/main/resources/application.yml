@@ -28,10 +28,11 @@ spring:
       maximumPoolSize: 3
       maxLifetime: 1800000
 
-mybatis:
-  mapper-locations: classpath*:mapper/routing/**/*.xml
-  type-aliases-package: com.ozz.mybatis.model
-  type-aliases-super-type: com.ozz.mybatis.model.BaseObject
-  configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-    mapUnderscoreToCamelCase: true
+# 单数据源配置
+#mybatis:
+#  mapper-locations: classpath*:mapper/routing/**/*.xml
+#  type-aliases-package: com.ozz.mybatis.model
+#  type-aliases-super-type: com.ozz.mybatis.model.BaseObject
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+#    mapUnderscoreToCamelCase: true
