@@ -28,7 +28,7 @@ spring:
       maximumPoolSize: 3
       maxLifetime: 1800000
 
-# 单数据源配置
+## 单数据源配置
 #mybatis:
 #  mapper-locations: classpath*:mapper/routing/**/*.xml
 #  type-aliases-package: com.ozz.mybatis.model
