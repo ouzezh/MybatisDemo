@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Import;
 @Import({RoutingDataSourceConfig.class, SecondDataSourceConfig.class})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 
+//// 单数据源配置
+//@MapperScan("com.ozz.mybatis.mapper")
+
 // @ImportResource(locations={"classpath:mybatis/spring-context.xml"})
 public class MybatisApp {
 
