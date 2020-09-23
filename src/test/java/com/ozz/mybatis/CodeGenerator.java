@@ -47,7 +47,7 @@ public class CodeGenerator {
 
   public static void main(String[] args) {
     String url =
-        "jdbc:log4jdbc:mysql://10.202.202.17:3306/api?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong";
+        "jdbc:log4jdbc:mysql://jw_db:3306/api?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong";
     String username = "api";
     String password = "p";
     String parent = "com.ozz.parent";
@@ -61,7 +61,7 @@ public class CodeGenerator {
     // 全局配置
     GlobalConfig gc = new GlobalConfig();
     String projectPath = System.getProperty("user.dir");
-    gc.setOutputDir(projectPath + "/src/main/java");
+    gc.setOutputDir(projectPath + "/src/main/generated");
     gc.setFileOverride(false);
     gc.setAuthor(author);
     gc.setOpen(false);
