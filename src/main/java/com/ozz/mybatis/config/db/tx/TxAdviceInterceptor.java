@@ -1,4 +1,4 @@
-package com.ozz.mybatis.component.db.tx;
+package com.ozz.mybatis.config.db.tx;
 
 import java.util.Collections;
 import java.util.Properties;

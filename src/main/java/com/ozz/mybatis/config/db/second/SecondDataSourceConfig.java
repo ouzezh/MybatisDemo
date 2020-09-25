@@ -1,4 +1,4 @@
-package com.ozz.mybatis.component.db.second;
+package com.ozz.mybatis.config.db.second;
 
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;

@@ -1,4 +1,4 @@
-package com.ozz.mybatis.component.db.routing;
+package com.ozz.mybatis.config.db.routing;
 
 import java.util.Map;
 

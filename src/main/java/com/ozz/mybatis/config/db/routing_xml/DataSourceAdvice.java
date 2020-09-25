@@ -1,12 +1,12 @@
-package com.ozz.mybatis.component.db.routing_xml;
+package com.ozz.mybatis.config.db.routing_xml;
 
 import java.lang.reflect.Method;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 
-import com.ozz.mybatis.component.db.routing.RoutingDataSource;
-import com.ozz.mybatis.component.db.routing.TargetDataSource;
+import com.ozz.mybatis.config.db.routing.RoutingDataSource;
+import com.ozz.mybatis.config.db.routing.TargetDataSource;
 
 public class DataSourceAdvice implements MethodBeforeAdvice, AfterReturningAdvice {
   @Override

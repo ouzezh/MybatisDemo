@@ -1,6 +1,6 @@
 package com.ozz.mybatis;
 
-import com.ozz.mybatis.component.db.routing.RoutingDataSource;
+import com.ozz.mybatis.config.db.routing.RoutingDataSource;
 import com.ozz.mybatis.mapper.routing.datasource.TestMapper;
 import com.ozz.mybatis.mapper.routing.datasource2.Test2Mapper;
 import com.ozz.mybatis.util.DbUtil;

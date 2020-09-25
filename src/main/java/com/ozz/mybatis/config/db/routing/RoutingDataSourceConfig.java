@@ -1,4 +1,4 @@
-package com.ozz.mybatis.component.db.routing;
+package com.ozz.mybatis.config.db.routing;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator;

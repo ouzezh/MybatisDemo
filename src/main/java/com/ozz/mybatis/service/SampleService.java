@@ -2,8 +2,8 @@ package com.ozz.mybatis.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.ozz.mybatis.component.db.routing.RoutingDataSource;
-import com.ozz.mybatis.component.db.routing.TargetDataSource;
+import com.ozz.mybatis.config.db.routing.RoutingDataSource;
+import com.ozz.mybatis.config.db.routing.TargetDataSource;
 import com.ozz.mybatis.mapper.routing.datasource.TestMapper;
 import com.ozz.mybatis.mapper.routing.datasource2.Test2Mapper;
 import com.ozz.mybatis.mapper.second.TestSecondMapper;

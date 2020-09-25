@@ -1,4 +1,4 @@
-package com.ozz.mybatis.component.db.routing;
+package com.ozz.mybatis.config.db.routing;
 
 import java.lang.reflect.Method;
 
@@ -25,7 +25,7 @@ public class RoutingDataSourceAspect implements Ordered {
   /**
    * 基于注解切换数据源
    */
-  @Pointcut("@annotation(com.ozz.mybatis.component.db.routing.TargetDataSource)")
+  @Pointcut("@annotation(com.ozz.mybatis.config.db.routing.TargetDataSource)")
   public void dataSourcePointCut() {
   }
 

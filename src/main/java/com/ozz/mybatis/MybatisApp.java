@@ -1,7 +1,7 @@
 package com.ozz.mybatis;
 
-import com.ozz.mybatis.component.db.routing.RoutingDataSourceConfig;
-import com.ozz.mybatis.component.db.second.SecondDataSourceConfig;
+import com.ozz.mybatis.config.db.routing.RoutingDataSourceConfig;
+import com.ozz.mybatis.config.db.second.SecondDataSourceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

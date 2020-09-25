@@ -41,7 +41,7 @@
 	</bean>
 
 	<bean id="routingDataSource"
-		class="com.ozz.mybatis.component.db.routing.RoutingDataSource">
+		class="com.ozz.mybatis.config.db.routing.RoutingDataSource">
 		<property name="defaultTargetDataSource" ref="dataSource1" />
 		<property name="targetDataSources">
 			<map>
@@ -96,7 +96,7 @@
 	</tx:advice>
 	<!-- 2.配置自己定义的切面类 -->
 	<bean id="dataSourceAdvice"
-		class="com.ozz.mybatis.component.db.routing_xml.DataSourceAdvice" />
+		class="com.ozz.mybatis.config.db.routing_xml.DataSourceAdvice" />
 	<!-- 3.根据切面动态切换数据源 -->
 	<aop:config>
 		<aop:pointcut id="servicePointcut"
