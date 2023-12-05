@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="1800 seconds" debug="false">
+    <property name="log.pattern.console"
+              value="%yellow(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) %blue(%thread) %green(%file:%line) %cyan(%logger{10}) - %magenta(%X{traceId}) %msg%n"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern.console}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+
+    <!-- HikariCP -->
+    <logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG"></logger>
+    <!-- p6sy -->
+    <logger name="p6spy" level="DEBUG"></logger>
+
+    <logger name="com.ozz" level="DEBUG"></logger>
+    <logger name="com.ozz.mybatis.mapper" level="INFO"></logger>
+
+</configuration>

@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.ozz'
+version = '0.1'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.2'
+    implementation 'p6spy:p6spy:latest.release'
+
+    implementation 'cn.hutool:hutool-all:5.8.18'// Hutool是一个小而全的Java工具类库
+}

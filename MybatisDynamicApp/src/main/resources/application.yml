@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        ds:
+          jdbcUrl: jdbc:p6spy:sqlite:C:\Dev\SQLite\demo_db.db
+#          jdbcUrl: jdbc:p6spy:mysql://my_db:5306/demo_db?serverTimezone=Hongkong
+#          username: myUser
+#          password: p
+          driverClassName: com.p6spy.engine.spy.P6SpyDriver
+          maximumPoolSize: 3
+          maxLifetime: 1500000
+        ds2:
+          jdbcUrl: jdbc:p6spy:sqlite:C:\Dev\SQLite\demo_db2.db
+#          jdbcUrl: jdbc:p6spy:mysql://my_db:5306/demo_db2?serverTimezone=Hongkong
+#          username: myUser
+#          password: p
+          driverClassName: com.p6spy.engine.spy.P6SpyDriver
+          maximumPoolSize: 3
+          maxLifetime: 1500000
+mybatis:
+  type-aliases-package: com.ozz.mybatis.model
+  type-aliases-super-type: com.ozz.mybatis.model.BaseObject
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    mapUnderscoreToCamelCase: true

@@ -1,1 +1,6 @@
 rootProject.name = 'MybatisDemo'
+
+include 'CommonConfig'
+include 'MybatisPlusApp'
+include 'MybatisDynamicApp'
+include 'MybatisPlusDynamicApp'
