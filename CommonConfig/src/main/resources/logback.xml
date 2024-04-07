@@ -14,7 +14,7 @@
     </root>
 
     <!-- HikariCP -->
-    <logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG"></logger>
+    <logger name="com.zaxxer.hikari" level="DEBUG"></logger>
     <!-- p6sy -->
     <logger name="p6spy" level="DEBUG"></logger>
 
