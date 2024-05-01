@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     implementation 'com.baomidou:dynamic-datasource-spring-boot-starter:3.5.1'
-    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.2'
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
     implementation 'p6spy:p6spy:latest.release' // jdbc 打印 sql
 
 //    runtimeOnly 'mysql:mysql-connector-java'

@@ -26,7 +26,8 @@ class MybatisPlusServiceTest extends MyBaseTest {
 
     @Test
     void testPage() {
-        IPage<MyDict> page = new Page<>(1, 1, false);
+        Page<MyDict> page = new Page<>(1, 1, false);
+        page.setOptimizeCountSql(false);// 取消count优化
         LambdaQueryWrapper<MyDict> query = new LambdaQueryWrapper<MyDict>().ge(MyDict::getId, 0L);
         mybatisPlusService.page(page, query);
         println(page.getRecords());
