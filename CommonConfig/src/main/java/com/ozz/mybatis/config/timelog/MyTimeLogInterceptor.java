@@ -1,8 +1,7 @@
-package com.ozz.mybatis.config.timelog.base;
+package com.ozz.mybatis.config.timelog;
 
 import cn.hutool.core.lang.Pair;
 import cn.hutool.log.StaticLog;
-import com.ozz.mybatis.config.timelog.MyTimeLogAdvisor;
 import com.ozz.mybatis.service.MyMailService;
 import lombok.Getter;
 import lombok.Setter;

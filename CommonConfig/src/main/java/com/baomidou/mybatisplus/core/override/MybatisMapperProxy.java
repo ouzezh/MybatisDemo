@@ -4,7 +4,7 @@
 package com.baomidou.mybatisplus.core.override;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.ozz.mybatis.config.timelog.base.MyTimeLogMapperProxyUtil;
+import com.ozz.mybatis.config.timelog.MyTimeLogMapperProxyUtil;
 import lombok.SneakyThrows;
 import org.apache.ibatis.binding.MapperProxy;
 import org.apache.ibatis.reflection.ExceptionUtil;

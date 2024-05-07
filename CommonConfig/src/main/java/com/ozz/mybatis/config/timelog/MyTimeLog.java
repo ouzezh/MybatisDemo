@@ -1,4 +1,4 @@
-package com.ozz.mybatis.config.timelog.base;
+package com.ozz.mybatis.config.timelog;
 
 import cn.hutool.core.lang.Pair;
 import lombok.Getter;

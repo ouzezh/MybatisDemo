@@ -1,6 +1,5 @@
 package com.ozz.mybatis.config.timelog;
 
-import com.ozz.mybatis.config.timelog.base.MyTimeLogInterceptor;
 import com.ozz.mybatis.service.MyMailService;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;

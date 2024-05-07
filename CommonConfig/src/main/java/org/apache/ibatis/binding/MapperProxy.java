@@ -15,7 +15,7 @@
  */
 package org.apache.ibatis.binding;
 
-import com.ozz.mybatis.config.timelog.base.MyTimeLogMapperProxyUtil;
+import com.ozz.mybatis.config.timelog.MyTimeLogMapperProxyUtil;
 import lombok.SneakyThrows;
 import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.ibatis.session.SqlSession;
