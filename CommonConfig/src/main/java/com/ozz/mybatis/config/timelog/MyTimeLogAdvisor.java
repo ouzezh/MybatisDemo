@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 @Component
 @Aspect
 public class MyTimeLogAdvisor extends StaticMethodMatcherPointcutAdvisor {
-    private static final long TIMEOUT_MILLIS = 1000L;
+    private static final long TIMEOUT_MILLIS = 0L;
     private static final String TIMEOUT_PACKAGE = "com.ozz";
 
     @Override

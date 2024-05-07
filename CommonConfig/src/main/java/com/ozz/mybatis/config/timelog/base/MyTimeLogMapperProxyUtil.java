@@ -2,29 +2,20 @@ package com.ozz.mybatis.config.timelog.base;
 
 import cn.hutool.core.lang.Pair;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Supplier;
 
-@SuppressWarnings("rawtypes")
-public class MyTimeLogMapperHandler implements InvocationHandler {
-    Object target;
-    Class targetClass;
+public class MyTimeLogMapperProxyUtil {
 
-    public MyTimeLogMapperHandler(Object target, Class targetClass) {
-        this.target = target;
-        this.targetClass = targetClass;
-    }
-
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public static <T> Object invoke(Class<T> mapperInterface, Method method, Supplier<Object> supplier) throws Throwable {
         long time = System.nanoTime();
-        Object obj = null;
+        Object res = null;
         Throwable te = null;
         try {
-            obj = method.invoke(this.target, args);
+            res = supplier.get();
         } catch (Exception e) {
             if (e instanceof InvocationTargetException && e.getCause() != null) {
                 te = e.getCause();
@@ -34,7 +25,7 @@ public class MyTimeLogMapperHandler implements InvocationHandler {
         }
         MyTimeLog timeLog = MyTimeLog.get();
         if (timeLog != null) {
-            String key = String.format("%s.%s()", this.targetClass.getName(), method.getName());
+            String key = String.format("%s.%s()", mapperInterface.getName(), method.getName());
             Pair<AtomicInteger, AtomicLong> p = timeLog.getMapperLogMap().computeIfAbsent(key, t->Pair.of(new AtomicInteger(0), new AtomicLong(0)));
             time = System.nanoTime() - time;
             p.getKey().incrementAndGet();
@@ -43,6 +34,6 @@ public class MyTimeLogMapperHandler implements InvocationHandler {
         if (te != null) {
             throw te;
         }
-        return obj;
+        return res;
     }
 }
