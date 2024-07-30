@@ -21,6 +21,7 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.StrUtil;
 import com.p6spy.engine.common.PreparedStatementInformation;
 import com.p6spy.engine.common.StatementInformation;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -29,10 +30,12 @@ import java.time.LocalDateTime;
  * This event listener offers more coarse grained event listener methods as it aggregates events for the execute* and
  * addBatch methods.
  */
+@Slf4j
 public abstract class SimpleJdbcEventListener extends JdbcEventListener {
 
     private void logSql(String sql) {
-        System.out.println(StrUtil.format("[SQL_START] {} | {}", LocalDateTimeUtil.formatNormal(LocalDateTime.now()), sql.replaceAll("\\s*\n", " ")));
+//        log.info(StrUtil.format("[SQL_START] {} | {}", LocalDateTimeUtil.formatNormal(LocalDateTime.now()), sql.replaceAll("\\s*\n", " ")));
+        log.info(StrUtil.format("{} {}", "[SQL_START]", LocalDateTimeUtil.formatNormal(LocalDateTime.now())));
     }
 
   /**
