@@ -34,8 +34,8 @@ import java.time.LocalDateTime;
 public abstract class SimpleJdbcEventListener extends JdbcEventListener {
 
     private void logSql(String sql) {
-//        log.info(StrUtil.format("[SQL_START] {} | {}", LocalDateTimeUtil.formatNormal(LocalDateTime.now()), sql.replaceAll("\\s*\n", " ")));
-        log.info(StrUtil.format("{} {}", "[SQL_START]", LocalDateTimeUtil.formatNormal(LocalDateTime.now())));
+//        log.info(StrUtil.format("[SQL_START] {}", sql.replaceAll("\\s*\n", " ")));
+        log.info("[SQL_START]");
     }
 
   /**
