@@ -1,9 +1,7 @@
 package com.ozz.mybatis.config.timelog;
 
-import com.ozz.mybatis.service.MyMailService;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -24,11 +22,6 @@ public class MyTimeLogAdvisor extends StaticMethodMatcherPointcutAdvisor {
 
     public MyTimeLogAdvisor() {
         super.setAdvice(new MyTimeLogInterceptor());
-    }
-
-    @Autowired
-    public void setMyMailService(MyMailService myMailService) {
-        ((MyTimeLogInterceptor) getAdvice()).setMyMailService(myMailService);
     }
 
     /**

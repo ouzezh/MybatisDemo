@@ -3,7 +3,6 @@ package com.ozz.mybatis.config.timelog;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Pair;
 import cn.hutool.core.lang.Tuple;
-import com.ozz.mybatis.service.MyMailService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,6 @@ import java.util.concurrent.atomic.AtomicLong;
 @Setter
 @Slf4j
 public class MyTimeLogInterceptor implements MethodInterceptor {
-    private MyMailService myMailService;
 
     private void buildLogStr(StringBuilder sb, MyTimeLog timeLog, long totalTime) {
         if(timeLog == null) {
@@ -51,15 +49,10 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
         }
     }
 
-    private void printLog(StringBuilder sb, Throwable te) {
+    private void printLog(StringBuilder sb, Throwable e) {
         sb.append("\n--end--\n");
         String msg = sb.toString();
         log.warn(msg);
-        try {
-            myMailService.sendErrorMail(te == null ? "运行超时" : "运行超时+异常", msg, te);
-        } catch (Exception e) {
-            log.error(null, e);
-        }
     }
 
     private void buildLogStr(StringBuilder sb, String methodPath, AtomicInteger invokeCount, AtomicLong costTime, long totalTime) {
