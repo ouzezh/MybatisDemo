@@ -1,12 +1,15 @@
 package com.ozz.mybatis.config.timelog;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Pair;
+import cn.hutool.core.lang.Tuple;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -18,12 +21,9 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MyTimeLog {
     private static final ThreadLocal<MyTimeLog> MAIN_LOG = new ThreadLocal<>();// 当前线程日志
 
-    /**
-     * <methodPath, Pair<executeCount, executeTime>>
-     */
-    // 代码执行时间
-    private Map<String, Pair<AtomicInteger, AtomicLong>> logMap = Collections.synchronizedMap(new LinkedHashMap<>());
-    // mybatis执行时间
+    // 代码执行时间 <methodPath, <invokeCount, costTime, isRunning>>
+    private Map<String, Tuple> logMap = Collections.synchronizedMap(new LinkedHashMap<>());
+    // mybatis执行时间 <methodPath, <invokeCount, costTime>>
     private Map<String, Pair<AtomicInteger, AtomicLong>> mapperLogMap = Collections.synchronizedMap(new LinkedHashMap<>());
 
     public static MyTimeLog get() {
@@ -35,13 +35,11 @@ public class MyTimeLog {
         if (m == null) {
             m = new MyTimeLog();
             MAIN_LOG.set(m);
-            m.setLogMap(new LinkedHashMap<>());
-            m.setMapperLogMap(new LinkedHashMap<>());
         }
         return m;
     }
 
-    public static MyTimeLog end() {
+    public static MyTimeLog stop() {
         MyTimeLog m = MAIN_LOG.get();
         MAIN_LOG.remove();
         return m;

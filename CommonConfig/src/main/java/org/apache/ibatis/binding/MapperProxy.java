@@ -80,6 +80,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//        return rawInvoke(proxy, method, args);
         return MyTimeLogMapperProxyUtil.invoke(mapperInterface, method, () -> rawInvoke(proxy, method, args));
     }
 

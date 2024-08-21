@@ -1,6 +1,8 @@
 package com.ozz.mybatis.config.timelog;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Pair;
+import cn.hutool.core.lang.Tuple;
 import cn.hutool.log.StaticLog;
 import com.ozz.mybatis.service.MyMailService;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import java.time.Duration;
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -30,20 +33,20 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
         }
         if(!timeLog.getLogMap().isEmpty()) {
             sb.append(System.lineSeparator()).append("--main--");
-            for (Map.Entry<String, Pair<AtomicInteger, AtomicLong>> en : timeLog.getLogMap().entrySet()) {
-                buildLogStr(sb, en, totalTime);
+            for (Map.Entry<String, Tuple> en : timeLog.getLogMap().entrySet()) {
+                buildLogStr(sb, en.getKey(), en.getValue().get(0), en.getValue().get(1), totalTime);
             }
         }
         if (!timeLog.getMapperLogMap().isEmpty()) {
             sb.append(System.lineSeparator()).append("--mapper--");
-            Pair<AtomicInteger, AtomicLong> total = Pair.of(new AtomicInteger(0), new AtomicLong(0));
+            Pair<AtomicInteger, AtomicLong> mapperTotal = Pair.of(new AtomicInteger(0), new AtomicLong(0));
             for (Map.Entry<String, Pair<AtomicInteger, AtomicLong>> en : timeLog.getMapperLogMap().entrySet()) {
-                total.getKey().addAndGet(en.getValue().getKey().get());
-                total.getValue().addAndGet(en.getValue().getValue().get());
+                mapperTotal.getKey().addAndGet(en.getValue().getKey().get());
+                mapperTotal.getValue().addAndGet(en.getValue().getValue().get());
             }
-            buildLogStr(sb, new AbstractMap.SimpleEntry<>("mapper-total", total), totalTime);
+            buildLogStr(sb, "mapper-total", mapperTotal.getKey(), mapperTotal.getValue(), totalTime);
             for (Map.Entry<String, Pair<AtomicInteger, AtomicLong>> en : timeLog.getMapperLogMap().entrySet()) {
-                buildLogStr(sb, en, totalTime);
+                buildLogStr(sb, en.getKey(), en.getValue().getKey(), en.getValue().getValue(), totalTime);
             }
         }
     }
@@ -59,44 +62,16 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
         }
     }
 
-    private void buildLogStr(StringBuilder sb, Map.Entry<String, Pair<AtomicInteger, AtomicLong>> en, long sumTime) {
+    private void buildLogStr(StringBuilder sb, String methodPath, AtomicInteger invokeCount, AtomicLong costTime, long totalTime) {
         sb.append(System.lineSeparator()).append("[")
-                .append(sumTime > 0 ? new DecimalFormat("#.##%").format((double)en.getValue().getValue().get() / (double)sumTime) : "100%").append("]");// 百分比
-        sb.append("[").append(millisToString(Duration.ofNanos(en.getValue().getValue().longValue()).toMillis())).append("]");// 时间
-        sb.append("[").append(en.getValue().getKey()).append("]");// 次数
-        sb.append(en.getKey());// 路径
+                .append(totalTime > 0 ? new DecimalFormat("#.##%").format((double)costTime.get() / (double)totalTime) : "100%").append("]");// 百分比
+        sb.append("[").append(formatBetween(Duration.ofNanos(costTime.longValue()).toMillis())).append("]");// 时间
+        sb.append("[").append(invokeCount).append("]");// 次数
+        sb.append(methodPath);// 路径
     }
 
-    public static String millisToString(long millis) {
-        String[] modUnits = {"分", "秒", "毫秒"};
-        long[] mods = {60, 1000, 1};
-
-        if (millis <= 0) {
-            return millis + modUnits[modUnits.length - 1];
-        }
-
-        long mod = 1;
-        for (long t : mods) {
-            mod = mod * t;
-        }
-
-        long tmpTime = millis;
-        StringBuilder timeString = new StringBuilder();
-        int bit = 0;
-        for (int i = 0; i < modUnits.length && bit <= 2; i++) {
-            long curr = tmpTime / mod;
-            tmpTime = tmpTime % mod;
-            mod = mod / mods[i];
-            if (curr > 0) {
-                bit++;
-                timeString.append(curr).append(modUnits[i]);
-            }
-            if (bit > 0) {
-                bit++;
-            }
-        }
-
-        return timeString.toString();
+    public static String formatBetween(long millis) {
+        return DateUtil.formatBetween(millis);
     }
 
     @Override
@@ -116,15 +91,19 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
                 timeLog = MyTimeLog.start();
             }
 
-            Pair<AtomicInteger, AtomicLong> v = timeLog.getLogMap().get(methodPath);
-            if (v == null) {
-                // 初始化统计信息
-                v = Pair.of(new AtomicInteger(), new AtomicLong());
-                timeLog.getLogMap().put(methodPath, v);
+            // 统计信息
+            Tuple v = timeLog.getLogMap().computeIfAbsent(methodPath, k -> new Tuple(new AtomicInteger(), new AtomicLong(), new AtomicBoolean(false)));
+            AtomicInteger invokeCount = v.get(0);
+            AtomicLong costTime = v.get(1);
+            AtomicBoolean isRunning = v.get(2);
+
+            boolean isRun = isRunning.get();
+            if(!isRun) {
+                isRunning.set(true);
             }
 
             // 执行方法
-            long totalTime = System.nanoTime();
+            long ct = System.nanoTime();
             Object object = null;
             Throwable te = null;
             try {
@@ -132,19 +111,21 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
             } catch (Throwable e) {
                 te = e;
             }
-            totalTime = System.nanoTime() - totalTime;
+            ct = System.nanoTime() - ct;
 
             // 执行次数
-            v.getKey().incrementAndGet();
+            invokeCount.incrementAndGet();
             // 执行时间
-            v.getValue().addAndGet(totalTime);
+            if(!isRun) {
+                costTime.addAndGet(ct);
+                isRunning.set(false);
+            }
 
             // toString
             if (isRoot) {
-                MyTimeLog myLog = MyTimeLog.end();
-                if (TimeUnit.NANOSECONDS.toMillis(totalTime) >= MyTimeLogAdvisor.getTimeoutMillis() && myLog!=null) {
+                if (TimeUnit.NANOSECONDS.toMillis(ct) >= MyTimeLogAdvisor.getTimeoutMillis()) {
                     StringBuilder sb = new StringBuilder();
-                    buildLogStr(sb, myLog, totalTime);
+                    buildLogStr(sb, timeLog, ct);
                     printLog(sb, te);
                 }
             }
@@ -155,7 +136,7 @@ public class MyTimeLogInterceptor implements MethodInterceptor {
             return object;
         } finally {
             if (isRoot) {
-                MyTimeLog.end();
+                MyTimeLog.stop();
             }
         }
     }
