@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MyTimeLog {
     private static final ThreadLocal<MyTimeLog> MAIN_LOG = new ThreadLocal<>();// 当前线程日志
 
-    // 代码执行时间 <methodPath, <invokeCount, costTime, isRunning>>
+    // 代码执行时间 <methodPath, [invokeCount, costTime, isRunning]>
     private Map<String, Tuple> logMap = Collections.synchronizedMap(new LinkedHashMap<>());
     // mybatis执行时间 <methodPath, <invokeCount, costTime>>
     private Map<String, Pair<AtomicInteger, AtomicLong>> mapperLogMap = Collections.synchronizedMap(new LinkedHashMap<>());
