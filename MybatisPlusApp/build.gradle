@@ -36,7 +36,7 @@ dependencies {
 //    runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'org.xerial:sqlite-jdbc:latest.release'
 
-    implementation 'cn.hutool:hutool-all:5.8.18'// Hutool是一个小而全的Java工具类库
+    implementation 'cn.hutool:hutool-all:5.8.39'// Hutool是一个小而全的Java工具类库
 }
 
 tasks.named('test') {

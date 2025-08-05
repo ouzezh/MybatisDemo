@@ -25,5 +25,5 @@ dependencies {
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
     implementation 'p6spy:p6spy:latest.release'
 
-    implementation 'cn.hutool:hutool-all:5.8.18'// Hutool是一个小而全的Java工具类库
+    implementation 'cn.hutool:hutool-all:5.8.39'// Hutool是一个小而全的Java工具类库
 }
