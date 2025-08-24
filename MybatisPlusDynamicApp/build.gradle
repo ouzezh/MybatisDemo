@@ -32,10 +32,10 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     implementation 'com.baomidou:dynamic-datasource-spring-boot-starter:3.6.1'
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
-    implementation 'p6spy:p6spy:latest.release' // jdbc 打印 sql
+    implementation 'p6spy:p6spy:3.9.1' // jdbc 打印 sql
 
 //    runtimeOnly 'mysql:mysql-connector-java'
-    runtimeOnly 'org.xerial:sqlite-jdbc:latest.release'
+    runtimeOnly 'org.xerial:sqlite-jdbc:3.49.1.0'
 
     implementation 'cn.hutool:hutool-all:5.8.39'// Hutool是一个小而全的Java工具类库
 }

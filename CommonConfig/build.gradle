@@ -23,7 +23,7 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.3.4'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
-    implementation 'p6spy:p6spy:latest.release'
+    implementation 'p6spy:p6spy:3.9.1'
 
     implementation 'cn.hutool:hutool-all:5.8.39'// Hutool是一个小而全的Java工具类库
 }
